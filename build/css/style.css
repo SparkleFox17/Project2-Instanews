@@ -139,7 +139,7 @@
     height: 100%; }
   body {
     background-color: black;
-    font-family: 'open_sanslight';
+    font-family: "open_sanslight";
     height: 100%; }
   .loading {
     position: fixed;
@@ -250,7 +250,7 @@
     height: 100%; }
   body {
     background-color: black;
-    font-family: 'open_sanslight';
+    font-family: "open_sanslight";
     height: 100%; }
   .loading {
     position: fixed;
