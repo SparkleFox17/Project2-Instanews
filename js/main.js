@@ -2,9 +2,9 @@ $(function () {
     $("#selector").on('change', getSelection); 
 }); 
 
-function getSelection() { //
+function getSelection() { 
     let selection = $("#selector").val(); 
-    console.log(selection); 
+    
 
     $('<p class="loading"><img src="./imgs/ajax-loader.gif" width="200"></p>').insertAfter('#header');
   
@@ -17,13 +17,12 @@ function getSelection() { //
 
     $.getJSON(url) 
     .done(function(data){ 
-       
+        console.log(data.response.docs);
         $('#header').addClass('short'); 
         $.each(data.response.docs, function(key, value){ 
-           
-            $('#nyt-list').append('<li class="article" style="background-image:url(https://static01.nyt.com/'+value.multimedia[14].url+');"> <a href="'+value.web_url+'" target="_blank"><p>'+value.snippet+'</p></a></li>');     
-          
-            console.log(value);
+            if(value.multimedia.length > 0){
+                $('#nyt-list').append('<li class="article" style="background-image:url(https://static01.nyt.com/'+value.multimedia[14].url+');"> <a href="'+value.web_url+'" target="_blank"><p>'+value.snippet+'</p></a></li>');     
+            }
         });
     })
     .fail(function(){
