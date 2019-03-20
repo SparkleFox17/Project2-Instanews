@@ -9,19 +9,20 @@ function getSelection() {
     $('<p class="loading"><img src="./imgs/ajax-loader.gif" width="200"></p>').insertAfter('#header');
   
     $('#nyt-list').html("");
-    let key = "F5eaciDwJVMg7O5nc01lbngH0BzHD23e";//
-    let url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q="+selection+"&api-key="+key+"";//let url = declaring variable, assigning a value which is the string.
-  
+
+    let key = "G1HGkvZ4iEpdFVqhaa1wvsgvB5yWx1iZ";
+    let url = "https://api.nytimes.com/svc/topstories/v2/"+selection+".json?api-key="+key+"";
 
 
+    let maxItems = 0;
 
-    $.getJSON(url) 
-    .done(function(data){ 
-        console.log(data.response.docs);
-        $('#header').addClass('short'); 
-        $.each(data.response.docs, function(key, value){ 
-            if(value.multimedia.length > 0){
-                $('#nyt-list').append('<li class="article" style="background-image:url(https://static01.nyt.com/'+value.multimedia[14].url+');"> <a href="'+value.web_url+'" target="_blank"><p>'+value.snippet+'</p></a></li>');     
+    $.getJSON(url) //jquey method endpoint
+    .done(function(data){ //
+        $('#header').addClass('short'); //
+        $.each(data.results, function(key, value){ //for ea art, running function, call funtions to execute statements bel to appen a new list item for each artic. you dynamically cancat the url and img fir the artic.
+            if(value.multimedia.length > 0 && maxItems < 12){ //0-11array imgs ,array of nultimedia
+                $('#nyt-list').append('<li class="article" style="background-image:url('+value.multimedia[4].url+');"> <a href="'+value.url+'" target="_blank"><p>'+value.abstract+'</p></a></li>');     
+                maxItems++; //inerating items up to 12
             }
         });
     })
@@ -31,4 +32,7 @@ function getSelection() {
     .always(function(){ 
         $('.loading').remove(); 
     });
+    
 } 
+
+  
