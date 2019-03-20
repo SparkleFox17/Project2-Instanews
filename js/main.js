@@ -32,7 +32,7 @@ function getSelection() {
     .always(function(){ 
         $('.loading').remove(); 
     });
-    
+     
 } 
 
   
